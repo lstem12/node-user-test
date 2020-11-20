@@ -1,8 +1,10 @@
 const exp = require('express');
 const dbInfo = require('./db-config');
 const oracleDb = require('oracledb');
+const bodyParser = require('body-parser');
 const port = 80;
 var server = exp();
+server.use(bodyParser.json());
 
 var getNodeTests = async function(params){
     console.log(params);
@@ -32,7 +34,10 @@ var getNodeTests = async function(params){
     }
     return jsonArr;
 };
-
+server.post('/nodetest',function(req,res){
+    console.log(req.body);
+    res.send('아아아');
+})
 server.get('/nodetests',async function(req,res,next){
     console.log(req.query);
     var jsonArr = await getNodeTests(req.query);

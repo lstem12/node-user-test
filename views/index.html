@@ -4,8 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
     안녕하세요 nodejs로 만든 웹사이트 입니다.
+    <button onclick="getNodeTests()">가져오기</button>
+    <button onclick="postNodeTest()">보내기</button>
+<script>
+    function postNodeTest(){
+        var url = '/nodetest';
+        var data = {
+            no : 1,
+            name : "didi"
+        }
+        $.ajax({
+            data : JSON.stringify(data),
+            method : 'POST',
+            contentType : 'application/json;charset=utf-8',
+            url : url,
+            success : function(res){
+                console.log(res);
+            },
+            error : function(err){
+                console.log(err);
+            } 
+        })
+    }
+    function getNodeTests(){
+        var url = 'http://localhost:8081/nodetests';
+        $.ajax({
+            method : 'GET',
+            url : url,
+            success : function(res){
+                console.log(res);
+            },
+            error : function(err){
+                console.log(err);
+            } 
+        })
+    }
+</script>
 </body>
 </html>
